@@ -1,10 +1,7 @@
-
 ---
-
 # VERCEL AI SDK RAG Chatbot
 
 In this project, we will build a chatbot that responds only with information it has within its knowledge base. The chatbot will be able to both store and retrieve information. This project has a wide range of use cases, from customer support to building your own second brain!
-
 ---
 
 ## What is RAG?
@@ -76,6 +73,12 @@ For example, when asking the model about your favorite food, the prompt preparat
 ![Prompt preparation](./public/all_together_process.png)
 
 By providing the appropriate context and refining the model’s objectives, we can maximize its reasoning capabilities.
+
+---
+
+## Tools
+
+A tool is a function that can be called by the model to perform a specific task. We can think of a tool like a program we give to the model that it can run as and when it deems necessary.
 
 ---
 
