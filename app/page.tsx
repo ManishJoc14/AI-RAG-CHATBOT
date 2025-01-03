@@ -8,11 +8,30 @@ import { useChat } from "ai/react";
 
 // NOTE - By default, useChat will send a POST request to the /api/chat endpoint
 // with the messages as the request body.
+// import { generateText } from "ai";
+// import { createOpenAI, openai } from "@ai-sdk/openai";
+// import { useEffect } from "react";
 
 export default function Chat() {
   const { messages, input, handleInputChange, handleSubmit } = useChat({
     maxSteps: 3,
   });
+
+  // useEffect(() => {
+  //   const openAI = createOpenAI({
+  //     apiKey: process.env.NEXT_PUBLIC_OPENAI_API_KEY,
+  //     name: "gpt-4o",
+  //   });
+  //   async function get() {
+  //     const { text } = await generateText({
+  //       model: openAI("gpt-4o"),
+  //       prompt: "What is love?",
+  //     });
+  //     console.log(text);
+  //   }
+  //   get();
+  // }, []);
+
   return (
     <div className="flex flex-col w-full max-w-md py-24 mx-auto stretch">
       <div className="space-y-4">

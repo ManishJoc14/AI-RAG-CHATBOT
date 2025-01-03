@@ -1,5 +1,6 @@
 import { createResource } from "@/lib/actions/resources";
 import { findRelevantContent } from "@/lib/ai/embedding";
+import { env } from "@/lib/env.mjs";
 import { openai } from "@ai-sdk/openai";
 import { streamText, tool } from "ai";
 import { z } from "zod";
@@ -9,6 +10,14 @@ export const maxDuration = 30;
 
 // POST Route handler
 export async function POST(req: Request) {
+  
+  if (!env.NEXT_PUBLIC_OPENAI_API_KEY) {
+    console.error("API Key is missing");
+    return new Response(JSON.stringify({ error: "API Key is missing" }), {
+      status: 400,
+    });
+  }
+
   try {
     // Retrieve the messages from the request body sent by useChat hook
     const { messages } = await req.json();
@@ -20,7 +29,9 @@ export async function POST(req: Request) {
       system: `You are a helpful assistant. Check your knowledge base before answering any questions.
       Only respond to questions using information from tool calls.
       if no relevant information is found in the tool calls, respond, "Sorry, I don't know."`,
-
+      headers: {
+        apiKey: env.NEXT_PUBLIC_OPENAI_API_KEY,
+      },
       tools: {
         // A tool is a function that can be called by the model to perform a specific task.
         addResource: tool({
